@@ -29,7 +29,7 @@ const HeaderWrapper = styled.div`
 `
 
 const MainLogoImage = styled.img`
-  height: 90px;
+  height: 60px;
 `
 
 const MainCoverImageWrapper = styled.div`
@@ -42,14 +42,13 @@ const MainCover = styled.img`
 
 const RestaurantsContentsList = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom: 150px;
 `
 
 const RestaurantsContentWrapper = styled.div`
-  width: 450px;
-  height: 300px;
-  padding: 48px;
+  width: 280px;
+  padding: 25px;
 `
 
 const RestaurantsImageNode = styled.img`
@@ -98,9 +97,9 @@ export const Restaurants = () => {
       {
         state.fetchState === REQUEST_STATE.LOADING?
           <>
-            <Skeleton variant="rect" width={450} height={300} />
-            <Skeleton variant="rect" width={450} height={300} />
-            <Skeleton variant="rect" width={450} height={300} />
+            <Skeleton variant="rect" width={280} height={200} />
+            <Skeleton variant="rect" width={280} height={200} />
+            <Skeleton variant="rect" width={280} height={200} />
           </>
         :
           state.restaurantsList.map((item, index) =>
