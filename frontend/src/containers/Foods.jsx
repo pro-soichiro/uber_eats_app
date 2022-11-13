@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 
 // components
 import { LocalMallIcon } from "../components/Icons";
-// import { FoodWrapper } from "../components/FoodWrapper";
-// import Skeleton from "@mui/material/Skeleton";
+import { FoodWrapper } from "../components/FoodWrapper";
+import Skeleton from "@mui/material/Skeleton";
 
 // api
 import { fetchFoods } from "../apis/foods";
 
 // images
 import MainLogo from "../images/logo.png";
-// import FoodImage from "../images/food-image.jpg";
+import FoodImage from "../images/food-image.jpg";
 
 // reducer
 import {
@@ -23,7 +23,7 @@ import {
 
 // constants
 import { COLORS } from "../style_constants";
-// import { REQUEST_STATE } from "../constants";
+import { REQUEST_STATE } from "../constants";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -43,16 +43,16 @@ const MainLogoImage = styled.img`
   height: 90px;
 `;
 
-// const FoodsList = styled.div`
-//   display: flex;
-//   justify-content: space-around;
-//   flex-wrap: wrap;
-//   margin-bottom: 50px;
-// `;
+const FoodsList = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+`;
 
-// const ItemWrapper = styled.div`
-//   margin: 16px;
-// `;
+const ItemWrapper = styled.div`
+  margin: 16px;
+`;
 
 export const Foods = ({ match }) => {
   const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
@@ -81,7 +81,7 @@ export const Foods = ({ match }) => {
           </Link>
         </BagIconWrapper>
       </HeaderWrapper>
-      {/* <FoodsList>
+      <FoodsList>
         {foodsState.fetchState === REQUEST_STATE.LOADING ? (
           <>
             {[...Array(12).keys()].map((i) => (
@@ -101,7 +101,7 @@ export const Foods = ({ match }) => {
             </ItemWrapper>
           ))
         )}
-      </FoodsList> */}
+      </FoodsList>
     </>
   );
 };
