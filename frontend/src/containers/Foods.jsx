@@ -7,6 +7,7 @@ import { LocalMallIcon } from "../components/Icons";
 import { FoodWrapper } from "../components/FoodWrapper";
 import Skeleton from "@mui/material/Skeleton";
 import { FoodOrderDialog } from "../components/FoodOrderDialog";
+import { NewOrderConfirmDialog } from "../components/NewOrderConfirmDialog";
 
 // api
 import { fetchFoods } from "../apis/foods";
@@ -58,6 +59,10 @@ const ItemWrapper = styled.div`
 const submitOrder = () => {
   console.log("オーダーーーーー");
 };
+
+const replaceOrder = () => {
+  console.log('replace order!!!')
+}
 
 export const Foods = ({ match }) => {
   const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
@@ -148,6 +153,11 @@ export const Foods = ({ match }) => {
           onClickOrder={() => submitOrder()}
         />
       )}
+      {
+        <NewOrderConfirmDialog
+          onClickSubmit={() => replaceOrder()}
+        />
+      }
     </>
   );
 };
