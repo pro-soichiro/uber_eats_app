@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from "react";
-// import styled from "styled-components";
-// import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // components
-// import { LocalMallIcon } from "../components/Icons";
+import { LocalMallIcon } from "../components/Icons";
 // import { FoodWrapper } from "../components/FoodWrapper";
 // import Skeleton from "@mui/material/Skeleton";
 
@@ -11,7 +11,7 @@ import { useEffect, useReducer } from "react";
 import { fetchFoods } from "../apis/foods";
 
 // images
-// import MainLogo from "../images/logo.png";
+import MainLogo from "../images/logo.png";
 // import FoodImage from "../images/food-image.jpg";
 
 // reducer
@@ -22,26 +22,27 @@ import {
 } from "../reducers/foods";
 
 // constants
-// import { COLORS } from "../style_constants";
+import { COLORS } from "../style_constants";
 // import { REQUEST_STATE } from "../constants";
 
-// const HeaderWrapper = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   padding: 8px 32px;
-// `;
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 32px;
+  background-color: pink;
+`;
 
-// const BagIconWrapper = styled.div`
-//   padding-top: 24px;
-// `;
+const BagIconWrapper = styled.div`
+  padding-top: 24px;
+`;
 
-// const ColoredBagIcon = styled(LocalMallIcon)`
-//   color: ${COLORS.MAIN};
-// `;
+const ColoredBagIcon = styled(LocalMallIcon)`
+  color: ${COLORS.MAIN};
+`;
 
-// const MainLogoImage = styled.img`
-//   height: 90px;
-// `;
+const MainLogoImage = styled.img`
+  height: 90px;
+`;
 
 // const FoodsList = styled.div`
 //   display: flex;
@@ -71,7 +72,7 @@ export const Foods = ({ match }) => {
 
   return (
     <>
-      {/* <HeaderWrapper>
+      <HeaderWrapper>
         <Link to="/restaurants">
           <MainLogoImage src={MainLogo} alt="main logo" />
         </Link>
@@ -81,7 +82,7 @@ export const Foods = ({ match }) => {
           </Link>
         </BagIconWrapper>
       </HeaderWrapper>
-      <FoodsList>
+      {/* <FoodsList>
         {foodsState.fetchState === REQUEST_STATE.LOADING ? (
           <>
             {[...Array(12).keys()].map((i) => (
