@@ -1,9 +1,9 @@
 import axios from "axios";
-import { restaurantsIndex } from "../urls/index";
+import { foodsIndex } from "../urls/index";
 
-export const fetchRestaurants = () => {
+export const fetchFoods = (restaurantId) => {
   return axios
-    .get(restaurantsIndex)
+    .get(foodsIndex(restaurantId))
     .then((res) => {
       return res.data;
     })

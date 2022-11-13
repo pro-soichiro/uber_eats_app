@@ -1,4 +1,4 @@
-import { REQUEST_STATE } from "../constants"
+import { REQUEST_STATE } from "../constants";
 
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL,
@@ -6,8 +6,8 @@ export const initialState = {
 };
 
 export const restaurantsActionTypes = {
-  FETCHING: 'FETCHING',
-  FETCH_SUCCESS: 'FETCH_SUCCESS'
+  FETCHING: "FETCHING",
+  FETCH_SUCCESS: "FETCH_SUCCESS",
 };
 
 export const restaurantsReducer = (state, action) => {
@@ -16,7 +16,7 @@ export const restaurantsReducer = (state, action) => {
       return {
         ...state,
         fetchState: REQUEST_STATE.LOADING,
-      }
+      };
     case restaurantsActionTypes.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
@@ -25,4 +25,4 @@ export const restaurantsReducer = (state, action) => {
     default:
       throw new Error();
   }
-}
+};
