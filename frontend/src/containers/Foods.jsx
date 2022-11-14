@@ -71,6 +71,9 @@ export const Foods = ({ match }) => {
     isOpenOrderDialog: false,
     selectedFood: null,
     selectedFoodCount: 1,
+    isOpenNewOrderDialog: true,
+    existingRestaurantName: 'ttt',
+    newRestaurantName: 'ttt',
   };
   const [state, setState] = useState(initialState);
 
@@ -155,7 +158,11 @@ export const Foods = ({ match }) => {
       )}
       {
         <NewOrderConfirmDialog
+          isOpen={state.isOpenNewOrderDialog}
+          onClose={() => setState({ ...state, isOpenNewOrderDialog: false })}
           onClickSubmit={() => replaceOrder()}
+          existingRestaurantName={state.existingRestaurantName}
+          newRestaurantName={state.newRestaurantName}
         />
       }
     </>
