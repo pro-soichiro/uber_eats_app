@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // components
 import { LocalMallIcon } from "../components/Icons";
@@ -11,6 +11,7 @@ import { NewOrderConfirmDialog } from "../components/NewOrderConfirmDialog";
 
 // api
 import { fetchFoods } from "../apis/foods";
+import { postLineFoods } from "../apis/line_foods";
 
 // images
 import MainLogo from "../images/logo.png";
@@ -25,7 +26,7 @@ import {
 
 // constants
 import { COLORS } from "../style_constants";
-import { REQUEST_STATE } from "../constants";
+import { HTTP_STATUS_CODE, REQUEST_STATE } from "../constants";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -56,14 +57,6 @@ const ItemWrapper = styled.div`
   margin: 16px;
 `;
 
-const submitOrder = () => {
-  console.log("オーダーーーーー");
-};
-
-const replaceOrder = () => {
-  console.log('replace order!!!')
-}
-
 export const Foods = ({ match }) => {
   const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
 
@@ -71,10 +64,11 @@ export const Foods = ({ match }) => {
     isOpenOrderDialog: false,
     selectedFood: null,
     selectedFoodCount: 1,
-    isOpenNewOrderDialog: true,
-    existingRestaurantName: 'ttt',
-    newRestaurantName: 'ttt',
+    isOpenNewOrderDialog: false,
+    existingRestaurantName: "",
+    newRestaurantName: "",
   };
+
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
@@ -88,6 +82,34 @@ export const Foods = ({ match }) => {
       });
     });
   }, []);
+
+  const history = useHistory();
+
+  const submitOrder = () => {
+    postLineFoods({
+      foodId: state.selectedFood.id,
+      count: state.selectedFoodCount,
+    })
+      .then(() => history.push("./orders"))
+      .catch((e) => {
+        console.log(e);
+        if (e.response.status === HTTP_STATUS_CODE.NOT_ACCEPTABLE) {
+          setState({
+            ...state,
+            isOpenOrderDialog: false,
+            isOpenNewOrderDialog: true,
+            existingRestaurantName: e.response.data.existing_restaurant,
+            newRestaurantName: e.response.data.new_restaurant,
+          });
+        } else {
+          throw e;
+        }
+      });
+  };
+
+  const replaceOrder = () => {
+    console.log("replace order!!!");
+  };
 
   return (
     <>
@@ -156,7 +178,7 @@ export const Foods = ({ match }) => {
           onClickOrder={() => submitOrder()}
         />
       )}
-      {
+      {state.isOpenNewOrderDialog && (
         <NewOrderConfirmDialog
           isOpen={state.isOpenNewOrderDialog}
           onClose={() => setState({ ...state, isOpenNewOrderDialog: false })}
@@ -164,7 +186,7 @@ export const Foods = ({ match }) => {
           existingRestaurantName={state.existingRestaurantName}
           newRestaurantName={state.newRestaurantName}
         />
-      }
+      )}
     </>
   );
 };
