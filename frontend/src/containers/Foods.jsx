@@ -11,7 +11,7 @@ import { NewOrderConfirmDialog } from "../components/NewOrderConfirmDialog";
 
 // api
 import { fetchFoods } from "../apis/foods";
-import { postLineFoods } from "../apis/line_foods";
+import { postLineFoods, replaceLineFoods } from "../apis/line_foods";
 
 // images
 import MainLogo from "../images/logo.png";
@@ -90,7 +90,7 @@ export const Foods = ({ match }) => {
       foodId: state.selectedFood.id,
       count: state.selectedFoodCount,
     })
-      .then(() => history.push("./orders"))
+      .then(() => history.push("/orders"))
       .catch((e) => {
         console.log(e);
         if (e.response.status === HTTP_STATUS_CODE.NOT_ACCEPTABLE) {
@@ -108,7 +108,10 @@ export const Foods = ({ match }) => {
   };
 
   const replaceOrder = () => {
-    console.log("replace order!!!");
+    replaceLineFoods({
+      foodId: state.selectedFood.id,
+      count: state.selectedFoodCount,
+    }).then(() => history.push("/orders"));
   };
 
   return (
