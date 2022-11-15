@@ -10,6 +10,7 @@ import { postOrder } from "../apis/orders";
 import { OrderDetailItem } from "../components/OrderDetailItem";
 import { OrderButton } from "../components/Button/OrderButton";
 import CircularProgress from "@mui/material/CircularProgress";
+import { HeaderWrapper, MainLogoImage } from "../components/StyledHeader";
 
 // reducer
 import {
@@ -23,16 +24,6 @@ import MainLogo from "../images/logo.png";
 
 // constants
 import { REQUEST_STATE } from "../constants";
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  padding: 8px 32px;
-`;
-
-const MainLogoImage = styled.img`
-  height: 90px;
-`;
 
 const OrderListWrapper = styled.div`
   display: flex;
