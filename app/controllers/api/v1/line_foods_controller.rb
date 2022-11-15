@@ -36,13 +36,21 @@ module Api
       def index
         line_foods = LineFood.active
         if line_foods.exists?
+          ids = []
+          count = 0
+          amount = 0
+
+          line_foods.each do |line_food|
+            ids << line_food.id
+            count += line_food[:count]
+            amount += line_food.total_amount
+          end
+
           render json: {
-            line_food_ids: line_foods.map { |line_food| line_food.id },
+            line_food_ids: ids,
             restaurant: line_foods[0].restaurant,
-            count: line_foods.sum { |line_food| line_food[:count] },
-            # count: line_foods.sum(&:line_food[:count]),
-            # amount: line_foods.sum { |line_food| line_food.total_amount },
-            amount: line_foods.sum(&:total_amount)
+            count: count,
+            amount: amount,
           }, status: :ok
         else
           render json: {}, status: :no_content
