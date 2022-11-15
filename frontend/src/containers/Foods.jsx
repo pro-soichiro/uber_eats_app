@@ -92,7 +92,6 @@ export const Foods = ({ match }) => {
     })
       .then(() => history.push("/orders"))
       .catch((e) => {
-        console.log(e);
         if (e.response.status === HTTP_STATUS_CODE.NOT_ACCEPTABLE) {
           setState({
             ...state,
