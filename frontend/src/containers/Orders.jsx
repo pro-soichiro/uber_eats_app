@@ -73,6 +73,10 @@ export const Orders = () => {
     }
   };
 
+  const isExistsLineFoodsSummary = () => (
+    state.fetchState === REQUEST_STATE.OK && state.lineFoodsSummary
+  );
+
   return (
     <>
       {/* order page header */}
@@ -102,7 +106,7 @@ export const Orders = () => {
             )}
           </OrderItemWrapper>
           <div>
-            {state.fetchState === REQUEST_STATE.OK && state.lineFoodsSummary && (
+            {isExistsLineFoodsSummary() && (
               <OrderButton
                 onClick={() => postLineFoods()}
                 disabled={
